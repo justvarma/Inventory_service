@@ -16,6 +16,9 @@ def add_stock():
     product_id=data.get('product_id')
     quantity=data.get('quantity')
 
+    if not product_id or quantity is None:
+        return jsonify({"error": "Both product_id and quantity are required"}), 400
+
     stock=ProductStock.query.get(product_id)
     if stock:
         stock.quantity+=quantity
