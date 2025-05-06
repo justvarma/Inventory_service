@@ -73,7 +73,7 @@ python app.py
 ```
 
 Your API will now be available at:
-📍 `http://localhost:5000`
+📍 `http://localhost:5000/apidocs`
 
 ---
 
