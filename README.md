@@ -35,15 +35,15 @@ A simple RESTful API built with **Flask** for managing product stock quantities.
 ## 📁 Project Structure
 
 ```
-flask-stock-management/
+Inventory_service/
 │
-├── app.py              # Main Flask app with API endpoints
-├── config.py           # Configuration for environment & DB
-├── models.py           # SQLAlchemy model (ProductStock)
-├── requirements.txt    # Python dependencies
-├── .env.example        # Sample environment config
-├── README.md           # Project documentation
-└── migrations/         # Flask-Migrate files (optional)
+├── app.py                  # Main Flask application with API endpoints
+├── config.py               # Database configuration and environment variables
+├── models.py               # SQLAlchemy model for ProductStock
+├── test.py                 # Unit tests for endpoints and model
+├── requirements.txt        # Python dependencies
+├── .env.example            # Example environment variable file
+└── README.md               # Project documentation
 ```
 
 ---
