@@ -61,8 +61,9 @@ flask-stock-management/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/flask-stock-management.git
-cd flask-stock-management
+git clone https://github.com/shamshi-piserve/internship-inventory-service.git
+cd internship-inventory-service
+
 ```
 
 ### 2. Create a Virtual Environment
