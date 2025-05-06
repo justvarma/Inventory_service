@@ -1,112 +1,98 @@
-```markdown
-# 📦 Inventory Service – E-Commerce Backend
+---
 
-A lightweight REST API for real-time inventory management in e-commerce systems. Provides essential stock operations with full Swagger documentation.
+### 📦 *Inventory Service – E-Commerce Backend*
+
+This service allows you to manage product stock in an e-commerce platform using a simple RESTful API. It is built using Flask, PostgreSQL, SQLAlchemy, and documented with Swagger UI.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
-| Component          | Technology               |
-|--------------------|--------------------------|
-| **Framework**      | Flask 3.x               |
-| **Language**       | Python 3.10+            |
-| **Database**       | PostgreSQL 14+          |
-| **ORM**            | SQLAlchemy 2.0          |
-| **API Docs**       | Flasgger (Swagger UI 3) |
-| **Testing**        | Pytest                  |
+* *Backend*: Python 3.x, Flask
+* *Database*: PostgreSQL
+* *ORM*: SQLAlchemy
+* *API Documentation*: Flasgger (Swagger UI)
+* *Testing*: Pytest
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Run the Server
 
-### Prerequisites
-- PostgreSQL server running
-- Python 3.10+
+### 1. *Clone the Repository*
 
-### Installation
-```bash
-# Clone repository
+bash
 git clone https://github.com/shamshi-piserve/internship-inventory-service.git
 cd internship-inventory-service
 
-# Setup virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/MacOS
-# venv\Scripts\activate  # Windows
 
-# Install dependencies
+### 2. *Install Dependencies*
+
+We recommend using a virtual environment:
+
+bash
 pip install -r requirements.txt
-```
 
-### Database Setup
-1. Create PostgreSQL database:
-```sql
-CREATE DATABASE inventory_db;
-```
 
-2. Configure connection in `.env`:
-```ini
-DATABASE_URL=postgresql://username:password@localhost:5432/inventory_db
-```
+### 3. *Set up the Database*
 
-3. Initialize tables:
-```bash
-flask shell
+* Make sure PostgreSQL is installed and running.
+
+* Create the database manually (if not already done):
+
+  sql
+  CREATE DATABASE inventory_db;
+  
+
+* (Optional) Create a .env file or update config.py with your DB credentials.
+
+### 4. *Initialize the Tables*
+
+Run Python shell or script:
+
+bash
+python
 >>> from app import db
 >>> db.create_all()
 >>> exit()
-```
 
-### Running the Server
-```bash
-# Development mode
+
+### 5. *Start the Server*
+
+bash
 python app.py
 
-# Production mode (recommended):
-gunicorn -w 4 -b :5000 app:app
-```
-→ Server runs at `http://localhost:5000`
+
+The API will run on http://localhost:5000
 
 ---
 
-## 🧪 Testing
-```bash
-# Run all tests
-pytest -v
+## 🧪 How to Test
 
-# Run with coverage report
-pytest --cov=app --cov-report=html
-```
-**Test Structure**:
-- Unit tests: `tests/test_models.py`
-- Integration tests: `tests/test_routes.py`
+### Run Unit Tests using Pytest:
+
+bash
+pytest
+
+
+You can add your tests inside test_app.py or organize into a /tests folder.
 
 ---
 
-## 📘 API Documentation
-Access interactive Swagger UI at:  
-🔗 [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
+## 📘 Access Swagger UI (API Docs)
 
-**Try sample requests directly in the browser!**
+After running the server, open this in your browser:
 
----
+👉 [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
 
-## 📌 API Endpoints
-
-| Method | Endpoint          | Request Body                              | Description                     |
-|--------|-------------------|------------------------------------------|---------------------------------|
-| POST   | `/stock/add`      | `{"product_id": str, "quantity": int}`   | Add/update product stock        |
-| POST   | `/stock/remove`   | `{"product_id": str, "quantity": int}`   | Reduce stock quantity           |
-| GET    | `/stock/check/{id}` | -                                      | Check current stock levels      |
-| GET    | `/health`         | -                                        | Service health check            |
+All endpoints will be visible there with descriptions and example inputs/outputs.
 
 ---
 
-## 🆘 Troubleshooting
-**Common Issues:**
-- **Database Connection Failed**: Verify PostgreSQL is running and credentials in `.env` are correct
-- **Missing Dependencies**: Re-run `pip install -r requirements.txt`
-- **Port Conflicts**: Change port with `flask run --port=5001`
+## 📌 Available Endpoints
 
-```
+| Method | Endpoint        | Description                |
+| ------ | --------------- | -------------------------- |
+| GET  | /             | Health check / welcome     |
+| POST | /add_stock    | Add new stock entry        |
+| POST | /remove_stock | Remove quantity from stock |
+| GET  | /check_stock  | View current stock levels  |
