@@ -1,5 +1,3 @@
-Here’s a cleaner, more intuitive, and well-structured version of your README for the **Flask Stock Management API** project. It includes improved formatting, concise headings, and clearer instructions for better readability:
-
 ---
 
 # 📦 Flask Stock Management API
@@ -231,11 +229,3 @@ pytest
 5. Open a Pull Request 🚀
 
 ---
-
-## 📄 License
-
-[MIT License](LICENSE) – feel free to use, modify, and distribute.
-
----
-
-Would you like me to generate a `README.md` file from this content?
