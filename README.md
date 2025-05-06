@@ -194,21 +194,63 @@ curl http://localhost:5000/stock/check/101
 
 ---
 
+
 ## 🧪 Testing
 
-Install testing tools:
+Unit tests are written in `test.py` using Python's built-in `unittest` framework. These tests cover:
+
+* ✅ `ProductStock` model
+* 📮 API endpoints: `/stock/add`, `/stock/remove`, `/stock/check/<product_id>`
+
+---
+
+### ⚡ Run Tests with SQLite (for local development)
+
+Use SQLite for faster and easier testing without needing PostgreSQL:
 
 ```bash
-pip install pytest pytest-flask
-```
-
-Create your tests in a `tests/` folder and run:
-
-```bash
-pytest
+set TEST_DB=sqlite
+.\venv\Scripts\python -m unittest test.py -v
 ```
 
 ---
+
+### 🐘 Run Tests with PostgreSQL (production-like environment)
+
+1. **Ensure the test database exists:**
+
+```sql
+psql -U postgres
+CREATE DATABASE test_inventory_db;
+\q
+```
+
+2. **Set environment variables:**
+
+```bash
+set TEST_DB=postgresql
+set TEST_SQLALCHEMY_DATABASE_URI=postgresql://postgres:your_secure_password@localhost:5432/test_inventory_db
+```
+
+3. **Run the tests:**
+
+```bash
+.\venv\Scripts\python -m unittest test.py -v
+```
+
+---
+
+### 🧪 Running Tests in PyCharm
+
+1. Open `test.py` in PyCharm.
+2. Right-click anywhere in the file and select **"Run 'Unittests in test.py'"**.
+3. In the Run Configuration settings:
+
+   * Make sure the **working directory** is set to:
+     `C:\Users\adity\OneDrive\Desktop\Aditya\Inventory_service`
+
+---
+
 
 ## 🧾 Database Schema
 
