@@ -86,11 +86,11 @@ def remove_stock():
                   example: 5
         responses:
           200:
-            description: Stock updated successfully
-          201:
-            description: New stock created successfully
+            description: Stock removed successfully
           400:
-            description: Invalid input
+            description: Invalid input or not enough stock
+          404:
+            description: Product not found
         """
     data=request.get_json()
     if not data:
@@ -109,6 +109,40 @@ def remove_stock():
         return jsonify({'message': 'Stock removed'}), 200
     elif stock:
         return jsonify({'error': 'Not enough stock'}), 400
+    else:
+        return jsonify({'error': 'Product not found'}), 404
+
+@app.route("/stock/check/<int:product_id>", methods=['GET'])
+def check_stock(product_id):
+    """
+        Check stock to a product
+        ---
+        tags:
+          - Stock Management
+        parameters:
+          - name: product_id
+            in: path
+            type: integer
+            required: true
+            description: ID of the product
+        responses:
+          200:
+            description: Stock quantity returned
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+          404:
+            description: Product not found
+        """
+    stock=ProductStock.query.get(product_id)
+    if stock:
+        return jsonify({
+            "product_id": product_id,
+            "quantity": stock.quantity}), 200
     else:
         return jsonify({'error': 'Product not found'}), 404
 
