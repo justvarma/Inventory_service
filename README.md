@@ -1,90 +1,100 @@
 ---
 
-### 📦 *Inventory Service – E-Commerce Backend*
+# 📦 **Inventory Service – E-Commerce Backend**
 
-This service allows you to manage product stock in an e-commerce platform using a simple RESTful API. It is built using Flask, PostgreSQL, SQLAlchemy, and documented with Swagger UI.
+This service allows you to manage product stock in an e-commerce platform using a simple RESTful API.
+It is built using **Flask**, **PostgreSQL**, **SQLAlchemy**, and documented with **Swagger UI**.
 
 ---
 
 ## 🛠 Tech Stack
 
-* *Backend*: Python 3.x, Flask
-* *Database*: PostgreSQL
-* *ORM*: SQLAlchemy
-* *API Documentation*: Flasgger (Swagger UI)
-* *Testing*: Pytest
+* **Backend**: Python 3.x, Flask
+* **Database**: PostgreSQL
+* **ORM**: SQLAlchemy
+* **API Documentation**: Flasgger (Swagger UI)
+* **Testing**: Pytest
 
 ---
 
 ## 🚀 How to Run the Server
 
-### 1. *Clone the Repository*
+### 1. Clone the Repository
 
-bash
+```bash
 git clone https://github.com/shamshi-piserve/internship-inventory-service.git
 cd internship-inventory-service
+```
 
+### 2. Install Dependencies
 
-### 2. *Install Dependencies*
+It’s recommended to use a virtual environment:
 
-We recommend using a virtual environment:
-
-bash
+```bash
 pip install -r requirements.txt
+```
 
-
-### 3. *Set up the Database*
+### 3. Set Up the Database
 
 * Make sure PostgreSQL is installed and running.
-
 * Create the database manually (if not already done):
 
-  sql
-  CREATE DATABASE inventory_db;
-  
+```sql
+CREATE DATABASE inventory_db;
+```
 
-* (Optional) Create a .env file or update config.py with your DB credentials.
+* *(Optional)* Create a `.env` file or update `config.py` with your DB credentials:
 
-### 4. *Initialize the Tables*
+```env
+DB_USER=postgres
+DB_PASS=yourpassword
+DB_HOST=localhost
+DB_NAME=inventory_db
+```
 
-Run Python shell or script:
+### 4. Initialize the Tables
 
-bash
+Start Python shell and run:
+
+```bash
 python
->>> from app import db
->>> db.create_all()
->>> exit()
+```
 
+```python
+from app import db
+db.create_all()
+exit()
+```
 
-### 5. *Start the Server*
+### 5. Start the Server
 
-bash
+```bash
 python app.py
+```
 
-
-The API will run on http://localhost:5000
+Your API will now be available at:
+📍 `http://localhost:5000`
 
 ---
 
 ## 🧪 How to Test
 
-### Run Unit Tests using Pytest:
+Run unit tests using **Pytest**:
 
-bash
+```bash
 pytest
+```
 
-
-You can add your tests inside test_app.py or organize into a /tests folder.
+You can place your tests inside `test_app.py` or organize them in a `/tests` directory.
 
 ---
 
 ## 📘 Access Swagger UI (API Docs)
 
-After running the server, open this in your browser:
-
+Once the server is running, access the Swagger UI here:
 👉 [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
 
-All endpoints will be visible there with descriptions and example inputs/outputs.
+It provides interactive documentation for all available endpoints.
 
 ---
 
@@ -92,7 +102,9 @@ All endpoints will be visible there with descriptions and example inputs/outputs
 
 | Method | Endpoint        | Description                |
 | ------ | --------------- | -------------------------- |
-| GET  | /             | Health check / welcome     |
-| POST | /add_stock    | Add new stock entry        |
-| POST | /remove_stock | Remove quantity from stock |
-| GET  | /check_stock  | View current stock levels  |
+| `GET`  | `/`             | Health check / Welcome     |
+| `POST` | `/add_stock`    | Add new stock entry        |
+| `POST` | `/remove_stock` | Remove quantity from stock |
+| `GET`  | `/check_stock`  | View current stock levels  |
+
+---
