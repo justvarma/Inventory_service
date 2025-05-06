@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from config import SQLALCHEMY_DATABASE_URI
 from models import db, ProductStock
 
@@ -7,22 +7,25 @@ app.config['SQLALCHEMY_DATABASE_URI']=SQLALCHEMY_DATABASE_URI
 
 db.init_app(app)
 
-@app.route("/stock/add", methords=['POST'])
+@app.route("/stock/add", methods=['POST'])
 def add_stock():
     data=request.get_json()
-    product_id=data['product_id']
-    quantity=data['quantity']
+    if not data:
+        return jsonify({"error": "Invalid or missing JSON"}), 400
+
+    product_id=data.get('product_id')
+    quantity=data.get('quantity')
 
     stock=ProductStock.query.get(product_id)
     if stock:
         stock.quantity+=quantity
-        db.session.commit(stock)
-        return {'message': 'Stock created'}, 200
+        db.session.commit()
+        return jsonify({'message': 'Stock created'}), 200
     else:
-        stock=ProductStock(product_id=data['product_id'], quantity=data['quantity'])
+        stock=ProductStock(product_id=product_id, quantity=quantity)
         db.session.add(stock)
         db.session.commit()
-        return {'message': 'Stock created'}, 201
+        return jsonify({'message': 'Stock created'}), 201
 
 if __name__=='__main__':
     with app.app_context():
