@@ -1,0 +1,1 @@
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:Adityavarma@123@localhost:5432/inventory_db"
