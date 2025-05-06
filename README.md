@@ -1,118 +1,186 @@
----
+Flask Stock Management API
+A simple RESTful API built with Flask for managing product stock quantities. The application supports adding, removing, and checking stock for products, using PostgreSQL as the database and Flask-SQLAlchemy for ORM. It includes Swagger documentation via Flasgger for easy API exploration.
+Features
 
-# 📦 **Inventory Service – E-Commerce Backend**
+Add Stock: Create or update stock quantities for a product.
+Remove Stock: Decrease stock quantities with validation for sufficient stock.
+Check Stock: Retrieve the current stock quantity for a product.
+Database: PostgreSQL for persistent storage.
+ORM: Flask-SQLAlchemy for database interactions.
+API Documentation: Swagger UI for interactive endpoint documentation.
+Logging: Basic logging for debugging and monitoring.
+Environment Configuration: Uses .env files for secure configuration.
 
-This service allows you to manage product stock in an e-commerce platform using a simple RESTful API.
-It is built using **Flask**, **PostgreSQL**, **SQLAlchemy**, and documented with **Swagger UI**.
+Tech Stack
 
----
+Python: 3.8+
+Flask: Web framework for building the API.
+Flask-SQLAlchemy: ORM for PostgreSQL integration.
+Flasgger: Swagger documentation for API endpoints.
+PostgreSQL: Database for storing stock data.
+python-dotenv: For loading environment variables.
 
-## 🛠 Tech Stack
+Project Structure
+flask-stock-management/
+│
+├── app.py                  # Main Flask application with API endpoints
+├── config.py               # Database configuration and environment variables
+├── models.py               # SQLAlchemy model for ProductStock
+├── requirements.txt        # Python dependencies
+├── .env.example            # Example environment variable file
+├── README.md               # Project documentation
+└── migrations/             # Flask-Migrate database migrations (if used)
 
-* **Backend**: Python 3.x, Flask
-* **Database**: PostgreSQL
-* **ORM**: SQLAlchemy
-* **API Documentation**: Flasgger (Swagger UI)
-* **Testing**: Pytest
+Prerequisites
 
----
+Python: 3.8 or higher
+PostgreSQL: Installed and running
+pip: Python package manager
+Git: For cloning the repository
 
-## 🚀 How to Run the Server
+Setup Instructions
+1. Clone the Repository
+git clone https://github.com/<your-username>/flask-stock-management.git
+cd flask-stock-management
 
-### 1. Clone the Repository
+2. Create a Virtual Environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-```bash
-git clone https://github.com/shamshi-piserve/internship-inventory-service.git
-cd internship-inventory-service
-```
-
-### 2. Install Dependencies
-
-It’s recommended to use a virtual environment:
-
-```bash
+3. Install Dependencies
 pip install -r requirements.txt
-```
 
-### 3. Set Up the Database
+4. Set Up PostgreSQL
 
-* Make sure PostgreSQL is installed and running.
-* Create the database manually (if not already done):
-
-```sql
+Ensure PostgreSQL is installed and running.
+Create a database named inventory_db:psql -U postgres
 CREATE DATABASE inventory_db;
-```
+\q
 
-* *(Optional)* Create a `.env` file or update `config.py` with your DB credentials:
 
-```env
-DB_USER=postgres
-DB_PASS=yourpassword
+
+5. Configure Environment Variables
+
+Copy the .env.example file to .env:cp .env.example .env
+
+
+Edit .env with your PostgreSQL credentials:DB_USER=postgres
+DB_PASS=your_secure_password
 DB_HOST=localhost
 DB_NAME=inventory_db
-```
+DB_PORT=5432
 
-### 4. Initialize the Tables
 
-Start Python shell and run:
 
-```bash
-python
-```
+6. Initialize the Database
 
-```python
-from app import db
-db.create_all()
-exit()
-```
+Run the Flask app to create the product_stock table:python app.py
 
-### 5. Start the Server
 
-```bash
+Alternatively, if using Flask-Migrate:flask db init
+flask db migrate
+flask db upgrade
+
+
+
+7. Run the Application
 python app.py
-```
 
-Your API will now be available at:
-📍 `http://localhost:5000`
+The API will be available at http://localhost:5000. Access the Swagger UI at http://localhost:5000/apidocs.
+API Endpoints
 
----
 
-## 🧪 How to Test
 
-Run unit tests using **Pytest**:
+Method
+Endpoint
+Description
 
-```bash
-pytest
-```
 
-You can place your tests inside `test_app.py` or organize them in a `/tests` directory.
 
----
+POST
+/stock/add
+Add stock to a product
 
-## 📘 Access Swagger UI (API Docs)
 
-Once the server is running, access the Swagger UI here:
-👉 [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
+POST
+/stock/remove
+Remove stock from a product
 
-It provides interactive documentation for all available endpoints.
 
----
+GET
+/stock/check/<product_id>
+Check stock quantity for a product
 
-## 📌 Available Endpoints
 
-| Method | Endpoint          | Request Body                             | Description                     |
-|--------|-------------------|------------------------------------------|---------------------------------|
-| POST   | `/stock/add`      | `{"product_id": str, "quantity": int}`   | Add/update product stock        |
-| POST   | `/stock/remove`   | `{"product_id": str, "quantity": int}`   | Reduce stock quantity           |
-| GET    | `/stock/check/{id}` | -                                      | Check current stock levels      |
-| GET    | `/health`         | -                                        | Service health check            |
+Example Requests
+Add Stock
+curl -X POST http://localhost:5000/stock/add \
+-H "Content-Type: application/json" \
+-d '{"product_id": 101, "quantity": 5}'
 
----
+Response (new stock):
+{
+  "message": "Stock created"
+}
 
-## 🆘 Troubleshooting
-**Common Issues:**
-- **Database Connection Failed**: Verify PostgreSQL is running and credentials in `.env` are correct
-- **Missing Dependencies**: Re-run `pip install -r requirements.txt`
-- **Port Conflicts**: Change port with `flask run --port=5001`
+Remove Stock
+curl -X POST http://localhost:5000/stock/remove \
+-H "Content-Type: application/json" \
+-d '{"product_id": 101, "quantity": 2}'
 
----
+Response:
+{
+  "message": "Stock removed"
+}
+
+Check Stock
+curl http://localhost:5000/stock/check/101
+
+Response:
+{
+  "product_id": 101,
+  "quantity": 3
+}
+
+Swagger Documentation
+
+Access the interactive API documentation at http://localhost:5000/apidocs.
+The Swagger UI provides detailed information on request/response formats, parameters, and status codes.
+
+Database Schema
+Table: product_stock
+
+
+
+Column
+Type
+Constraints
+
+
+
+product_id
+Integer
+Primary Key
+
+
+quantity
+Integer
+Not Null, Default: 0, >= 0
+
+
+Testing
+
+Install testing dependencies:pip install pytest pytest-flask
+
+
+Write unit tests in a tests/ directory and run:pytest
+
+
+
+Contributing
+
+Fork the repository.
+Create a feature branch (git checkout -b feature/your-feature).
+Commit changes (git commit -m "Add your feature").
+Push to the branch (git push origin feature/your-feature).
+Open a pull request.
