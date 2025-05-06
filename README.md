@@ -244,10 +244,7 @@ set TEST_SQLALCHEMY_DATABASE_URI=postgresql://postgres:your_secure_password@loca
 
 1. Open `test.py` in PyCharm.
 2. Right-click anywhere in the file and select **"Run 'Unittests in test.py'"**.
-3. In the Run Configuration settings:
-
-   * Make sure the **working directory** is set to:
-     `C:\Users\adity\OneDrive\Desktop\Aditya\Inventory_service`
+3. In the Run Configuration, ensure the working directory is set to the root of the project directory, e.g., the folder that contains app.py.
 
 ---
 
