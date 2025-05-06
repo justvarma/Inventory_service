@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.py[co]
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.python-version
+
+# Virtual Environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Database
+*.db
+*.sqlite
+*.sql
+*.dump
+*.backup
+/pg_data/ 
+
+# Flask
+instance/
+.migrations/  
+
+# PostgreSQL specific
+postgresql/
+pgadmin/
+pg_log/
+postgresql.*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# macOS
+.DS_Store
