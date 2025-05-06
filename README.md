@@ -135,11 +135,11 @@ python app.py
 
 ## 📡 API Endpoints
 
-| Method | Endpoint            | Description                  |
-| ------ | ------------------- | ---------------------------- |
-| POST   | `/stock/add`        | Add stock for a product      |
-| POST   | `/stock/remove`     | Remove stock from a product  |
-| GET    | `/stock/check/<id>` | Check current stock quantity |
+| Method | Endpoint                    | Description                  |
+| ------ | --------------------------- | ---------------------------- |
+| POST   | `/stock/add`                | Add stock for a product      |
+| POST   | `/stock/remove`             | Remove stock from a product  |
+| GET    | `/stock/check/<product_id>` | Check current stock quantity |
 
 ---
 
