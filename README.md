@@ -100,11 +100,19 @@ It provides interactive documentation for all available endpoints.
 
 ## 📌 Available Endpoints
 
-| Method | Endpoint        | Description                |
-| ------ | --------------- | -------------------------- |
-| `GET`  | `/`             | Health check / Welcome     |
-| `POST` | `/add_stock`    | Add new stock entry        |
-| `POST` | `/remove_stock` | Remove quantity from stock |
-| `GET`  | `/check_stock`  | View current stock levels  |
+| Method | Endpoint          | Request Body                             | Description                     |
+|--------|-------------------|------------------------------------------|---------------------------------|
+| POST   | `/stock/add`      | `{"product_id": str, "quantity": int}`   | Add/update product stock        |
+| POST   | `/stock/remove`   | `{"product_id": str, "quantity": int}`   | Reduce stock quantity           |
+| GET    | `/stock/check/{id}` | -                                      | Check current stock levels      |
+| GET    | `/health`         | -                                        | Service health check            |
+
+---
+
+## 🆘 Troubleshooting
+**Common Issues:**
+- **Database Connection Failed**: Verify PostgreSQL is running and credentials in `.env` are correct
+- **Missing Dependencies**: Re-run `pip install -r requirements.txt`
+- **Port Conflicts**: Change port with `flask run --port=5001`
 
 ---
