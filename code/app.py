@@ -9,6 +9,10 @@ swagger = Swagger(app)
 
 db.init_app(app)
 
+@app.route('/')
+def home():
+    return {"message": "Inventory Service Running"}
+
 @app.route("/stock/add", methods=['POST'])
 def add_stock():
     """
