@@ -16,7 +16,7 @@ def home():
 @app.route("/stock/add", methods=['POST'])
 def add_stock():
     """
-        Add stock to a productt
+        Add stock to a product
         ---
         tags:
           - Stock Management
