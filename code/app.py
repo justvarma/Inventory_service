@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']=SQLALCHEMY_DATABASE_URI
 swagger = Swagger(app)
 
-db.init_app(app)
+db.init_app(app))
 
 @app.route('/')
 def home():
