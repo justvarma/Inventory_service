@@ -14,7 +14,7 @@ def home():
     return {"message": "Inventory Service Running"}
 
 @app.route("/stock/add", methods=['POST'])
-def add_stock():
+def add_stock()::
     """
         Add stock to a product
         ---
